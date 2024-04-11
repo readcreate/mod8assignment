@@ -250,19 +250,19 @@ const oneRandom = function(inputArray) {
 }
 
 //STEP 17
-function compareNumbers(a, b) {
-    return a - b;
-    // reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
-  }
+// function compareNumbers(a, b) {
+//     return a - b;
+//     // reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+//   }
 
-const largestNumber = function(numericArray) {
+// const largestNumber = function(numericArray) {
 
-    let allNumeric = numericArray.every((i) => {return typeof i === 'number'})
+//     let allNumeric = numericArray.every((i) => {return typeof i === 'number'})
 
-    if (allNumeric) {
-        return numericArray.sort(compareNumbers).reverse()[0]
-    } else {
-        return "Input array must ONLY contain numeric elements."
-    }
+//     if (allNumeric) {
+//         return numericArray.sort(compareNumbers).reverse()[0]
+//     } else {
+//         return "Input array must ONLY contain numeric elements."
+//     }
     
-}
+// }
