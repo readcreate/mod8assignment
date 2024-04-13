@@ -1,3 +1,5 @@
+// Anshul Kumar - Module 8 assignment - Comp 690 Spring 2024, SDCCE
+
 //STEP 1
 // let anshulFavoriteMovies = [
 //     "In Bruges",
