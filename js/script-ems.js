@@ -16,7 +16,13 @@ initialEmployees = [
 // IF DOES, RETURN STORAGE OBJECT INTO ARRAY INSTEAD OF POPULATED ARRAY
 // if does, set empArray = localstorage array
 // if doesn't, set empArray = initialEmployees
-empArray = initialEmployees
+if (localStorage.employees) {
+    empArray = JSON.parse(localStorage.getItem('employees'))
+} else {
+    empArray = initialEmployees
+}
+
+
 
 // GET DOM ELEMENTS
 let form = document.getElementById("addForm")
@@ -37,28 +43,52 @@ form.addEventListener('submit', (e) => {
     e.preventDefault()
 
     // GET THE VALUES FROM THE TEXT BOXES
+    let empID = document.getElementById('id').value
+    let empName = document.getElementById('name').value
+    let empExt = document.getElementById('extension').value
+    let empEmail = document.getElementById('email').value
+    let empDept = document.getElementById('department').value
 
     // ADD THE NEW EMPLOYEE TO A NEW ARRAY OBJECT
+    let newEmployee = [empID, empName,empExt,empEmail,empDept]
 
     // PUSH THE NEW ARRAY TO THE *EXISTING* EMPLOYEES ARRAY
+    empArray.push(newEmployee)
 
     // BUILD THE GRID
+    buildGrid()
 
     // RESET THE FORM
+    form.reset()
 
     // SET FOCUS BACK TO THE ID TEXT BOX
+    let btnID = document.getElementById('id')
+    btnID.focus()
 
 });
 
 // DELETE EMPLOYEE
 empTable.addEventListener('click', (e) => {
-    // CONFIRM THE DELETE
+    // CHECK IF THE REMOVE BUTTON WAS CLICKED
+    if (e.target.innerHTML==="Remove") {
+        // CONFIRM THE DELETE
+        if (confirm('Are you sure you want to remove this employee?')) {
+            // GET THE SELECTED ROWINDEX FOR THE TR (PARENTNODE.PARENTNODE)
+            removeRowIndex = e.target.parentNode.parentNode.rowIndex-1
+            
+            // REMOVE EMPLOYEE FROM ARRAY
+            // empArray - remove removeRowIndex - 1 element in empArray
+            empArray.splice(removeRowIndex,1)
+            
+            // BUILD THE GRID
+            buildGrid()
 
-        // GET THE SELECTED ROWINDEX FOR THE TR (PARENTNODE.PARENTNODE)
+        }
+    }
 
-        // REMOVE EMPLOYEE FROM ARRAY
 
-        // BUILD THE GRID 
+
+         
 
 });
 
@@ -87,6 +117,7 @@ function buildGrid() {
         <td>${i[2]}</td>
         <td>${i[3]}</td>
         <td>${i[4]}</td>
+        <td><button>Remove</button></td>
         </tr>`
 
         // console.log(i)
@@ -100,8 +131,10 @@ function buildGrid() {
     empTable.appendChild(myTBody)
 
     // UPDATE EMPLOYEE COUNT
+    document.getElementById('empCount').innerText = `(${empArray.length})`
 
     // STORE THE ARRAY IN STORAGE
+    localStorage.setItem('employees', JSON.stringify(empArray))
 
 };
 
@@ -129,4 +162,9 @@ function buildGrid() {
 //     return
 // }
 
-// upload test
+// <td style="color:red; text-decoration: underline; cursor: pointer">Remove</td>
+
+// console.log(e.target)
+// a = e.target
+// a.parentNode
+// a.parentNode.parentNode
