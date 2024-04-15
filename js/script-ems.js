@@ -14,8 +14,6 @@ initialEmployees = [
 
 // CHECK TO SEE IF STORAGE OBJECT EXISTS WHEN THE PAGE LOADS
 // IF DOES, RETURN STORAGE OBJECT INTO ARRAY INSTEAD OF POPULATED ARRAY
-// if does, set empArray = localstorage array
-// if doesn't, set empArray = initialEmployees
 if (localStorage.employees) {
     empArray = JSON.parse(localStorage.getItem('employees'))
 } else {
